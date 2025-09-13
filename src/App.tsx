@@ -58,14 +58,18 @@ function getSortedGoods(
 }
 
 export const App: React.FC = () => {
-  const [sortProduct, setSortProduct] = useState(SortType.start);
-  const [reverse, setReverse] = useState(Reverse.no);
+  const [sortProduct, setSortProduct] = useState<SortType>(SortType.start);
+  const [reverse, setReverse] = useState<Reverse>(Reverse.no);
 
   const visibleProduct = getSortedGoods(goodsFromServer, sortProduct, reverse);
 
   const coincidence =
     visibleProduct.length === goodsFromServer.length &&
     visibleProduct.every((g, i) => g === goodsFromServer[i]);
+
+    const handleSortByName = () => setSortProduct(SortType.ByName);
+    const handleSortByLength = () => setSortProduct(SortType.ByLength);
+    const handleToggleReverse = () => setReverse(prev => prev === Reverse.no ? Reverse.yes : Reverse.no);
 
   return (
     <div className="section content">
@@ -75,7 +79,7 @@ export const App: React.FC = () => {
           className={clasNam('button is-info', {
             'is-light': sortProduct !== SortType.ByName,
           })}
-          onClick={() => setSortProduct(SortType.ByName)}
+          onClick={handleSortByName}
         >
           Sort alphabetically
         </button>
@@ -85,7 +89,7 @@ export const App: React.FC = () => {
           className={clasNam('button is-success', {
             'is-light': sortProduct !== SortType.ByLength,
           })}
-          onClick={() => setSortProduct(SortType.ByLength)}
+          onClick={handleSortByLength}
         >
           Sort by length
         </button>
@@ -95,9 +99,7 @@ export const App: React.FC = () => {
           className={clasNam('button is-warning', {
             'is-light': reverse !== Reverse.yes,
           })}
-          onClick={() =>
-            setReverse(ch => (ch !== Reverse.yes ? Reverse.yes : Reverse.no))
-          }
+          onClick={handleToggleReverse}
         >
           Reverse
         </button>
@@ -107,8 +109,8 @@ export const App: React.FC = () => {
             type="button"
             className="button is-danger is-light"
             onClick={() => {
-              setSortProduct(SortType.start);
-              setReverse(Reverse.no);
+              setSortProduct(SortType.start)
+              setReverse(Reverse.no)
             }}
           >
             Reset
