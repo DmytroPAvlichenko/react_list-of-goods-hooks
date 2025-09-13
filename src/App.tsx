@@ -71,10 +71,10 @@ export const App: React.FC = () => {
   const handleSortByLength = () => setSortProduct(SortType.ByLength);
   const handleToggleReverse = () =>
     setReverse(prev => (prev === Reverse.no ? Reverse.yes : Reverse.no));
-  const handReset = () =>
-   setSortProduct(SortType.start); 
-   setReverse(Reverse.no);
-
+  const handReset = () => {
+    setSortProduct(SortType.start);
+    setReverse(Reverse.no);
+  };
 
   return (
     <div className="section content">
