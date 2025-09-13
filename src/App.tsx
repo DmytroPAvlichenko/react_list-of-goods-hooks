@@ -67,9 +67,14 @@ export const App: React.FC = () => {
     visibleProduct.length === goodsFromServer.length &&
     visibleProduct.every((g, i) => g === goodsFromServer[i]);
 
-    const handleSortByName = () => setSortProduct(SortType.ByName);
-    const handleSortByLength = () => setSortProduct(SortType.ByLength);
-    const handleToggleReverse = () => setReverse(prev => prev === Reverse.no ? Reverse.yes : Reverse.no);
+  const handleSortByName = () => setSortProduct(SortType.ByName);
+  const handleSortByLength = () => setSortProduct(SortType.ByLength);
+  const handleToggleReverse = () =>
+    setReverse(prev => (prev === Reverse.no ? Reverse.yes : Reverse.no));
+  const handReset = () =>
+   setSortProduct(SortType.start); 
+   setReverse(Reverse.no);
+
 
   return (
     <div className="section content">
@@ -108,10 +113,7 @@ export const App: React.FC = () => {
           <button
             type="button"
             className="button is-danger is-light"
-            onClick={() => {
-              setSortProduct(SortType.start)
-              setReverse(Reverse.no)
-            }}
+            onClick={handReset}
           >
             Reset
           </button>
